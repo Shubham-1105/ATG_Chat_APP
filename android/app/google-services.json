@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "223101949769",
+    "firebase_url": "https://atg-chat-task.firebaseio.com",
+    "project_id": "atg-chat-task",
+    "storage_bucket": "atg-chat-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223101949769:android:48243dd6314e84bdb2ec98",
+        "android_client_info": {
+          "package_name": "com.shubham.atg_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223101949769-6img226s14rg8bdljre7qlb0j2julkf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSyX4NFME5RC-dekLg_zdJclrHUReculo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223101949769-6img226s14rg8bdljre7qlb0j2julkf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
