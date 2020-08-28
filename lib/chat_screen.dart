@@ -16,6 +16,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController=TextEditingController();
   String email;
+  String name;
   final _auth=FirebaseAuth.instance;
   
   String messageText;
@@ -33,6 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
       final user=  _auth.currentUser;
        if(user!=null){
       logedInUser=user;
+
       print(logedInUser.email);
     }
       
@@ -106,6 +108,7 @@ void messagesStream() async{
                     ),
                   ),
                   FlatButton(
+
                     onPressed: () {
 
                       _firestore.collection("messages").add({
@@ -114,6 +117,7 @@ void messagesStream() async{
                          'messageTime':DateTime.now(),
                       });
                       messageTextController.clear();
+                      
                     },
                     child: Text(
                       'Send',

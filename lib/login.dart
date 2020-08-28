@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final formKey=GlobalKey<FormState>();
   
   final _auth=FirebaseAuth.instance;
   final emailcontroller=TextEditingController() ;
@@ -24,12 +24,39 @@ class _LoginScreenState extends State<LoginScreen> {
    super.initState();
 
  }
- void getDetails() async{
-  SharedPreferences prefs=await SharedPreferences.getInstance();
-  email=prefs.getString("user");
-  password=prefs.getString("pass");
 
- }
+
+// String _userfromFirebaseID(User user){
+//   return user!=null ? user.uid:null;
+// }
+
+
+
+// Future<User> signwithEmailandPassword(String email ,String password) async{
+
+//   try {
+//   final result= await _auth.signInWithEmailAndPassword(email: email, password: password);
+//   User user=result.user;
+//   String UserId=_userfromFirebaseID(user);
+//   return user;
+  
+//   if(user!=null){
+//   Navigator.pushNamed(context, ChatScreen.id);
+//   }
+
+
+//   setState(() {
+//   showSpinner=false;
+//   });
+//   } catch (e) {
+//   print(e);
+//   }
+
+
+
+// }
+
+
 
 
 
@@ -64,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
 
-                decoration: kTextFieldDecoration.copyWith(hintText:"Enter your Email"),
+                decoration: kTextFieldDecoration.copyWith(hintText:"Enter your Email",icon: const Padding(padding: const EdgeInsets.only(top:15.0),
+                child:const Icon(Icons.person))),
               ),
               SizedBox(
                 height: 8.0,
@@ -95,19 +123,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner=true;
                       });
-                      try {
-                        final user= await _auth.signInWithEmailAndPassword(email: email, password: password);
-                        if(user!=null){
-                          Navigator.pushNamed(context, ChatScreen.id);
-                        }
-                        
-                       
-                        setState(() {
+                      
+                          try {
+                          final result= await _auth.signInWithEmailAndPassword(email: email, password: password);
+                          if(result!=null){
+                          Navigator.pushNamed(context,"search_screen");
+                          }
+
+
+                          setState(() {
                           showSpinner=false;
-                        });
-                      } catch (e) {
-                        print(e);
-                      }
+                          });
+                          } catch (e) {
+                          print(e);
+                          }
+                     
                       
                       
                     },

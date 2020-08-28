@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_screen.dart';
 import 'constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -12,6 +13,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth=FirebaseAuth.instance;
+  final _firestore=FirebaseFirestore.instance;
+  String name;
   String email;
   String password;
   bool showSpinner=false;
@@ -31,7 +34,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                 height: 48.0,
               ),
-              TextField(
+              TextFormField(
+                validator: (value){
+                  if(value.isEmpty){
+                    return "Enter your name";
+                  }
+                  return null;
+                  
+                },
+                
+                keyboardType: TextInputType.name,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  name=value;
+                },
+                decoration: kTextFieldDecoration.copyWith(hintText: "Enter Your Name"),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -71,7 +93,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     try {
                          final newUser= await _auth.createUserWithEmailAndPassword(email: email, password: password);
                          if(newUser!=null){
-                           Navigator.pushNamed(context,ChatScreen.id);
+                           _firestore.collection("users").add({
+                             "name":name,
+                             "email":email
+
+                           }                     
+                             
+
+
+                           );
+                           Navigator.pushNamed(context,"login");
                          }
 
                          setState(() {

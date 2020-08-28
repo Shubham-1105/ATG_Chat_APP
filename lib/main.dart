@@ -7,6 +7,7 @@ import 'chat_screen.dart';
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'search.dart';
 
 bool jwt;
 class MyApp extends StatelessWidget {
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
       routes: <String,WidgetBuilder>{
         "login":(context)=>LoginScreen(),
         "register":(context)=>RegistrationScreen(),
-        "chat_screen":(context)=> ChatScreen()
+        "chat_screen":(context)=> ChatScreen(),
+        "search_screen":(context)=>SearchScreen()
 
       },  
       
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs=await SharedPreferences.getInstance();
-  jwt=prefs.getBool('verifyUser')??false;
+  // jwt=prefs.getBool('verifyUser')??false;
   runApp(MyApp());
 
 }
