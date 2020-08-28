@@ -2,6 +2,16 @@
 
 A new Flutter project.
 
+## A Simple Chat Application which uses FireBase as Backend.
+
+It uses FireBase Authentication for Sign In,Sign Up and Sign Out using Email and Password
+
+It uses FireBase FireStore or uploading and retriving Chats Messages
+
+We also used Streams and Stream Builder so that the messages load in an instant without going for any event handling as in on click of a button.
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
