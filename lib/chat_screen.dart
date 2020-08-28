@@ -2,21 +2,26 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final _firestore=FirebaseFirestore.instance;
 User logedInUser;
 
 class ChatScreen extends StatefulWidget {
+
+
+  
   static const String id="chat_screen";
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final messageTextController=TextEditingController();
+
   String email;
   String name;
+  
+  final messageTextController=TextEditingController();
+  
   final _auth=FirebaseAuth.instance;
   
   String messageText;
@@ -25,7 +30,6 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
-    getName();
 
   }
 
@@ -46,13 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   }
 
-     getName()async{
-     SharedPreferences prefs=await SharedPreferences.getInstance();
-     setState(() {
-       email=(prefs.getString("user")??null);
-     });
 
-   }
 
   // void getMessages() async{
   //   final messages= await _firestore.collection("messages").get();
@@ -84,7 +82,7 @@ void messagesStream() async{
                 
               }),
         ],
-        title: Text('⚡️Chat'),
+        title: Text('⚡️ Chats'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
